@@ -12,7 +12,7 @@ class ParserTest {
 		assert 2 == parser.parse('class A{}', 'class B{}').size()
 	}
 	
-	@Ignore void returnsFailureIfNotParsable() {
+	@Ignore() void returnsFailureIfNotParsable() {
 		assert 'tbd' == parser.parse('not parsable')[0]
 	}
 }
