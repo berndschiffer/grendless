@@ -3,12 +3,13 @@ class Grendless {
 	def formatter
 	
 	def Grendless(out) {
-		formatter = new TestResultFormatter(out: out)
+		formatter = new GFormatter(out: out)
 	}
 	
 	def run(file) {
 		def files = new Filter().filter(file)
-		def result = new Runner().run(*files)
+		def testClasses = new Parser().parse(*files)
+		def result = new Runner().run(*testClasses)
 		formatter.format(result)
 	}
 	

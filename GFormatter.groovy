@@ -1,4 +1,4 @@
-class TestResultFormatter {
+class GFormatter {
 	
 	def out
 	

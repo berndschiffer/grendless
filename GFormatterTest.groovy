@@ -1,8 +1,8 @@
 import org.junit.*
 
-class TestResultFormatterTest {
+class GFormatterTest {
 	
-	def formatter = new TestResultFormatter()
+	def formatter = new GFormatter()
 	
 	def format2Result = [
 		'Tests: 1': [wasSuccessful: {}, runCount: 1],
