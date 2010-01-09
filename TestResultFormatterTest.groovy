@@ -2,21 +2,24 @@ import org.junit.*
 
 class TestResultFormatterTest {
 	
-	def out = new StringWriter()
-	def formatter = new TestResultFormatter(out: out)
+	def formatter = new TestResultFormatter()
 	
 	def format2Result = [
 		'Tests: 1': [wasSuccessful: {}, runCount: 1],
 		'(OK)': [wasSuccessful: { true }, runCount: 1],
 		'Failures: 1': [wasSuccessful: { false }, failureCount: 1],
+		'Ignored: 1': [wasSuccessful: {}, ignoreCount: 1],
 	]
 	
 	@Test void countsTests() {
-		format2Result.each{ format, result -> assertFormattedResult(format, result) }
+		format2Result.each{ format, result -> 
+			formatter.out = new StringWriter()
+			assertFormattedResult(format, result)
+	 	}
 	}
 	
 	def assertFormattedResult(expected, result) {
 		formatter.format(result)
-		assert out.toString().contains(expected)
+		assert formatter.out.toString().contains(expected)
 	}
 }

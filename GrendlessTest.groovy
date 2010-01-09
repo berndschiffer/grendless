@@ -1,8 +1,9 @@
 import org.junit.*
 
-class GrendlessRunnerTest {
+class GrendlessTest {
 	
 	def out = new StringWriter()
+	def runner = new Grendless(out)
 	
 	def singleTest = """import org.junit.*
 class SingleTest {
@@ -10,9 +11,12 @@ class SingleTest {
 }"""
 	
 	@Test void runsSingleTest() {
-		def runner = new GrendlessRunner(out)
 		runner.run(singleTest)
 		assert out.toString().contains('Tests: 1')
 	}
 	
+	@Test void runsSeveralTests() {
+		runner.run(singleTest, singleTest)
+		assert out.toString().contains('Tests: 2')
+	}	
 }
