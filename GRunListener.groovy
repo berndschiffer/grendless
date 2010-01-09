@@ -1,4 +1,5 @@
 import org.junit.runner.notification.*
+import org.junit.runner.*
 
 class GRunListener extends RunListener {
 	
@@ -13,5 +14,13 @@ class GRunListener extends RunListener {
 			if(it.fileName.endsWith('.java')) return
 			out << "\tat $it\n"
 		}
+	}
+	
+	void testStarted(Description description) {
+		out << '.'
+	}
+	
+	void testRunFinished(Result result) {
+		out << '\n'
 	}
 }
