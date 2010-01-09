@@ -2,10 +2,11 @@ class Grendless {
 	
 	def filter = new Filter()
 	def parser = new Parser()
-	def runner = new Runner()
+	def runner
 	def formatter
 	
 	def Grendless(out) {
+		runner = new Runner(listener: new GRunListener(out: out))
 		formatter = new GFormatter(out: out)
 	}
 	
