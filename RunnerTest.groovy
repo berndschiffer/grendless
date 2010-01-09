@@ -1,4 +1,5 @@
 import org.junit.*
+import org.junit.runner.notification.*
 
 class RunnerTest {
 	
@@ -19,5 +20,18 @@ class RunnerTest {
 	def assertSuccessfulRunCount(runCount, result) {
 		assert runCount == result.runCount
 		assert result.wasSuccessful()
+	}
+	
+	static class FailingTest {
+		@Test void failure() { assert false }
+	}
+	
+	@Test void triggersRunListenerForFailingTests() {
+		def itIs = [:]
+		runner.listener = new RunListener() {
+			void testFailure(Failure failure) { itIs.called = true }
+		}
+		runner.run(FailingTest)
+		assert itIs.called
 	}
 }

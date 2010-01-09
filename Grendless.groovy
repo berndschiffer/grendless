@@ -1,5 +1,8 @@
 class Grendless {
 	
+	def filter = new Filter()
+	def parser = new Parser()
+	def runner = new Runner()
 	def formatter
 	
 	def Grendless(out) {
@@ -7,9 +10,9 @@ class Grendless {
 	}
 	
 	def run(file) {
-		def files = new Filter().filter(file)
-		def testClasses = new Parser().parse(*files)
-		def result = new Runner().run(*testClasses)
+		def files = filter.filter(file)
+		def testClasses = parser.parse(*files)
+		def result = runner.run(*testClasses)
 		formatter.format(result)
 	}
 	

@@ -1,7 +1,13 @@
 class Runner {
+
+	def core = new org.junit.runner.JUnitCore()
+	def listener
+	
+	void setListener(listener) {
+		core.addListener(listener)
+	}
 	
 	def run(... testClasses) {
-		def core = new org.junit.runner.JUnitCore()
 		def result = core.run(*testClasses)
 	}
 }
