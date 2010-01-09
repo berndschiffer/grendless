@@ -6,16 +6,10 @@ class Grendless {
 		formatter = new TestResultFormatter(out: out)
 	}
 	
-	def run(... tests) {
-		def testClasses = new Parser().parse(tests)
-		def core = new org.junit.runner.JUnitCore()
-		def result = core.run(*testClasses)
-		formatter.format(result)
-	}
-	
-	def start(file) {
+	def run(file) {
 		def files = new Filter().filter(file)
-		run(*files)
+		def result = new Runner().run(*files)
+		formatter.format(result)
 	}
 	
 	static void main(args) {
@@ -23,7 +17,7 @@ class Grendless {
 
 		for(;;) {
 			sleep 2000
-			runner.start(new File(args[0]))
+			runner.run(new File(args[0]))
 		}
 	}
 }
