@@ -1,11 +1,13 @@
 class Grendless {
 	
 	def filter = new Filter()
-	def parser = new Parser()
+	def parser
 	def runner
 	
 	def Grendless(out) {
-		runner = new Runner(listener: new GRunListener(out: out))
+		def listener = new GRunListener(out: out)
+		runner = new Runner(listener: listener)
+		parser = new Parser(listener: listener)
 	}
 	
 	def run(file) {

@@ -12,6 +12,10 @@ class GRunListener extends RunListener {
 		printStackTrace(failure)
 	}
 	
+	void testUnparsable(Failure failure) {
+		testFailure(failure)
+	}
+	
 	private printStackTrace(failure) {
 		failure.exception.stackTrace.each{
 			if(!it.fileName || it.fileName.endsWith('.java')) return
