@@ -1,5 +1,4 @@
 Backlog (the more important the more at the top):
 
-   * A Cache should track all classes under control (not only tests) and let tests run if there were changes.
    * A Slider should slide the output from one test run to the next.
    * Write a bug report because result.getIgnoreCount() seems to be broken.

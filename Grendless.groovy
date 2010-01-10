@@ -2,6 +2,7 @@ class Grendless {
 	
 	def cache = new Cache()
 	def filter = new Filter()
+	def collector = new Collector()
 	def parser
 	def runner
 	
@@ -12,9 +13,10 @@ class Grendless {
 	}
 	
 	def run(file) {
-		def files = filter.filter(file)
+		def files = collector.collect(file)
 		cache.execute {
-			def testClasses = parser.parse(*files)
+			def filteredFiles = filter.filter(files)
+			def testClasses = parser.parse(*filteredFiles)
 			runner.run(*testClasses)
 		}.ifThereAreNew(files)
 	}
@@ -23,7 +25,7 @@ class Grendless {
 		def runner = new Grendless(System.out)
 
 		for(;;) {
-			sleep 2000
+			sleep 200
 			runner.run(new File(args[0]))
 		}
 	}
