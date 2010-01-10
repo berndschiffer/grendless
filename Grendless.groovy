@@ -1,5 +1,6 @@
 class Grendless {
 	
+	def cache = new Cache()
 	def filter = new Filter()
 	def parser
 	def runner
@@ -12,8 +13,10 @@ class Grendless {
 	
 	def run(file) {
 		def files = filter.filter(file)
-		def testClasses = parser.parse(*files)
-		runner.run(*testClasses)
+		cache.execute {
+			def testClasses = parser.parse(*files)
+			runner.run(*testClasses)
+		}.ifThereAreNew(files)
 	}
 	
 	static void main(args) {
