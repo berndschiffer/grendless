@@ -41,6 +41,7 @@ class GRunListener extends RunListener {
 		printNewLine()
 		out << "Tests: ${result.runCount}"
 		out << (result.wasSuccessful() ? ' (OK)' : " , Failures: ${result.failureCount}")
+		if(!result.runCount) out << ": no tests found :("
 		if(result.ignoreCount) out << ", Ignored: ${result.ignoreCount}"
 	}
 }

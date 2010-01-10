@@ -16,6 +16,7 @@ class GRunListenerTest {
 		'(OK)': [wasSuccessful: { true }, getRunCount: { 1 }],
 		'Failures: 1': [wasSuccessful: { false }, getFailureCount: { 1 }],
 		'Ignored: 1': [wasSuccessful: {}, getIgnoreCount: { 1 }],
+		'no tests found': [wasSuccessful: {}, getRunCount: { 0 }],
 	]
 	
 	@Test void countsTests() {
