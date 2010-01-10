@@ -4,8 +4,14 @@ import org.junit.runner.*
 class GRunListener extends RunListener {
 	
 	def out
+	def scrollLines
+	
+	void testRunStarted(Description description) {
+		scrollLines.times { out << '\n' }
+	}
 	
 	void testFailure(Failure failure) {
+		printNewLine()
 		def (testName, testClass) = failure.description.displayName.split('[\\(\\)]')
 		out << "Failure in ${testClass}.${testName}\n"
 		out << "${failure.message}\n"
@@ -27,11 +33,14 @@ class GRunListener extends RunListener {
 		out << '.'
 	}
 	
-	void testRunFinished(Result result) {
+	void printNewLine() {
 		out << '\n'
+	}
+	
+	void testRunFinished(Result result) {
+		printNewLine()
 		out << "Tests: ${result.runCount}"
 		out << (result.wasSuccessful() ? ' (OK)' : " , Failures: ${result.failureCount}")
 		if(result.ignoreCount) out << ", Ignored: ${result.ignoreCount}"
-		out << '\n'
 	}
 }

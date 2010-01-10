@@ -1,4 +1,3 @@
 Backlog (the more important the more at the top):
 
-   * A Slider should slide the output from one test run to the next.
    * Write a bug report because result.getIgnoreCount() seems to be broken.

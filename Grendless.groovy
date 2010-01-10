@@ -6,8 +6,8 @@ class Grendless {
 	def parser
 	def runner
 	
-	def Grendless(out) {
-		def listener = new GRunListener(out: out)
+	def Grendless(out, scrollLines) {
+		def listener = new GRunListener(scrollLines: scrollLines, out: out)
 		runner = new Runner(listener: listener)
 		parser = new Parser(listener: listener)
 	}
@@ -22,7 +22,7 @@ class Grendless {
 	}
 	
 	static void main(args) {
-		def runner = new Grendless(System.out)
+		def runner = new Grendless(System.out, 40)
 
 		for(;;) {
 			sleep 200
