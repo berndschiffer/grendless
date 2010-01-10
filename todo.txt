@@ -1,4 +1,5 @@
 Backlog (the more important the more at the top):
 
+   * Grendless should complain when it founds 0 tests.
    * Slider should slow down a little bit, so one could see better with only few tests from green to green bar.
    * Write a bug report because result.getIgnoreCount() seems to be broken.
