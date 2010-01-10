@@ -6,6 +6,7 @@ class Parser {
 	def listener
 
 	def parse(... tests) {
+		listener?.parserRunStarted?.call()
 		tests.inject([]) { classes, test -> parseTest(test, classes) }
 	}
 	

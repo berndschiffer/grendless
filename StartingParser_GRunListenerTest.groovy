@@ -1,12 +1,12 @@
 import org.junit.*
 
-class StartingTests_GRunListenerTest {
+class StartingParser_GRunListenerTest {
 	
 	def out = new StringWriter()
 	def listener = new GRunListener(scrollLines: 2, out: out)
 	
 	@Test void scrollsTextUpWhenTestRunStarted() {
-		listener.testRunStarted(null)
+		listener.parserRunStarted()
 		assert out.toString() == "\n\n"
 	}
 }

@@ -6,7 +6,7 @@ class GRunListener extends RunListener {
 	def out
 	def scrollLines
 	
-	void testRunStarted(Description description) {
+	def parserRunStarted = {
 		scrollLines.times { out << '\n' }
 	}
 	
