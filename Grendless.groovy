@@ -4,8 +4,10 @@ class Grendless {
 	def parser 
 	def runner
 	
-	def Grendless(out, scrollLines) {
-		def screen = new Screen(scrollLines: scrollLines, out: out)
+	def Grendless(out, afreshLines) {
+		def screen = new Screen(afreshLines: afreshLines,
+														delayer: new Delayer(lag: 7),
+														out: out)
 		def listener = new GRunListener(screen: screen)
 		runner = new Runner(listener: listener)
 		parser = new Parser(listener: listener)

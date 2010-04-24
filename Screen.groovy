@@ -1,9 +1,15 @@
 class Screen {
 	
 	def out
-	def scrollLines
+	def afreshLines
+	def delayer
 	
-	def startAfresh() { scrollLines.times { out << '\n' } }
+	def startAfresh() { 
+		afreshLines.times {
+			out << '\n'
+			delayer?.delay()
+		}
+	}
 	
 	void printNewLine() { out << '\n' }
 	
