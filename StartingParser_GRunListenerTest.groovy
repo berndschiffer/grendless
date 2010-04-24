@@ -2,11 +2,10 @@ import org.junit.*
 
 class StartingParser_GRunListenerTest {
 	
-	def out = new StringWriter()
-	def listener = new GRunListener(scrollLines: 2, out: out)
+	def screen = new Screen(scrollLines: 2, out: new StringWriter())
 	
 	@Test void scrollsTextUpWhenTestRunStarted() {
-		listener.parserRunStarted()
-		assert out.toString() == "\n\n"
+		screen.startAfresh()
+		assert screen.toString() == "\n\n"
 	}
 }

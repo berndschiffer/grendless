@@ -3,18 +3,15 @@ import org.junit.runner.*
 
 class GRunListener extends RunListener {
 	
-	def out
-	def scrollLines
+	def screen
 	
-	def parserRunStarted = {
-		scrollLines.times { out << '\n' }
-	}
+	def parserRunStarted = { screen.startAfresh() }
 	
 	void testFailure(Failure failure) {
-		printNewLine()
+		screen.printNewLine()
 		def (testName, testClass) = failure.description.displayName.split('[\\(\\)]')
-		out << "Failure in ${testClass}.${testName}\n"
-		out << "${failure.message}\n"
+		screen << "Failure in ${testClass}.${testName}\n"
+		screen << "${failure.message}\n"
 		printStackTrace(failure)
 	}
 	
@@ -25,23 +22,19 @@ class GRunListener extends RunListener {
 	private printStackTrace(failure) {
 		failure.exception.stackTrace.each{
 			if(!it.fileName || it.fileName.endsWith('.java')) return
-			out << "\tat $it\n"
+			screen << "\tat $it\n"
 		}
 	}
 	
 	void testStarted(Description description) {
-		out << '.'
+		screen << '.'
 	}
-	
-	void printNewLine() {
-		out << '\n'
-	}
-	
+		
 	void testRunFinished(Result result) {
-		printNewLine()
-		out << "Tests: ${result.runCount}"
-		out << (result.wasSuccessful() ? ' (OK)' : " , Failures: ${result.failureCount}")
-		if(!result.runCount) out << ": no tests found :("
-		if(result.ignoreCount) out << ", Ignored: ${result.ignoreCount}"
+		screen.printNewLine()
+		screen << "Tests: ${result.runCount}"
+		screen << (result.wasSuccessful() ? ' (OK)' : " , Failures: ${result.failureCount}")
+		if(!result.runCount) screen << ": no tests found :("
+		if(result.ignoreCount) screen << ", Ignored: ${result.ignoreCount}"
 	}
 }

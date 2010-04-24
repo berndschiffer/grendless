@@ -3,12 +3,12 @@ import org.junit.runner.*
 
 class GRunListenerTest {
 	
-	def out = new StringWriter()
-	def listener = new GRunListener(out: out)
+	def screen = new Screen(out: new StringWriter())
+	def listener = new GRunListener(screen: screen)
 	
 	@Test void showsADotForAStartingTest() {
 		listener.testStarted(null)
-		assert '.' == out.toString()
+		assert '.' == screen.toString()
 	}
 
 	def format2Result = [
@@ -21,14 +21,14 @@ class GRunListenerTest {
 	
 	@Test void countsTests() {
 		format2Result.each{ format, result -> 
-			listener.out = new StringWriter()
+			screen.out = new StringWriter()
 			assertFormattedResult(format, result)
 	 	}
 	}
 	
 	def assertFormattedResult(expected, result) {
 		listener.testRunFinished(result as Result)
-		assert listener.out.toString().contains(expected)
+		assert listener.screen.toString().contains(expected)
 	}
 	
 }

@@ -4,8 +4,8 @@ import org.junit.runner.Description
 
 class FailingTestsReports_GRunListenerTest {
 	
-	def out = new StringWriter()
-	def listener = new GRunListener(out: out)
+	def screen = new Screen(out: new StringWriter())
+	def listener = new GRunListener(screen: screen)
 	
 	@Before void addFailureToListener() {
 		def description = Description.createTestDescription(this.getClass(), 'name')
@@ -23,24 +23,22 @@ class FailingTestsReports_GRunListenerTest {
 	}
 	
 	@Test void showsLocationOfFailure() {
-		assert out.toString().contains('Failure in FailingTestsReports_GRunListenerTest.name')
+		assert screen.toString().contains('Failure in FailingTestsReports_GRunListenerTest.name')
 	}
 	
 	@Test void showsExceptionMessage() {
-		assert out.toString().contains('message')		
+		assert screen.toString().contains('message')		
 	}
 	
 	@Test void showsStackTrace() {
-		assert out.toString().contains('\tat ')				
+		assert screen.toString().contains('\tat ')				
 	}
 	
 	@Test void filtersOutAllJavaTraceFromStack() {
-		assert !out.toString().contains('.java:')				
+		assert !screen.toString().contains('.java:')				
 	}
 	
 	@Test void filtersOutAllUnknownSourcesFromStack() {
-		assert !out.toString().contains('Unknown Source')				
+		assert !screen.toString().contains('Unknown Source')				
 	}
-	
-	//@Test void foo() { assert false }
 }
