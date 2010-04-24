@@ -2,3 +2,6 @@ Backlog (the more important the more at the top):
 
    * Bug: NumberFormatException is not shown if thrown in a test.
    * Write a bug report because result.getIgnoreCount() seems to be broken.
+
+What is wanted:
+   * Grendless should do with JUnit-Tests in Java, what it does for JUnit-Tests in Groovy right now. (Chris W. 01/13/2010)
